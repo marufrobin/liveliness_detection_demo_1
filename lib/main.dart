@@ -2,6 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'face_detection_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -80,19 +82,19 @@ class _HomePageState extends State<HomePage> {
                   : () async {
                       final cameras = await availableCameras();
                       if (cameras.isNotEmpty) {
-                        // final result = await Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const FaceDetectionPage(),
-                        //   ),
-                        // );
-                        // if (result == true) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Verification Successful!'),
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FaceDetectionPage(),
                           ),
                         );
-                        // }
+                        if (result == true) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Verification Successful!'),
+                            ),
+                          );
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Camera not active!')),
